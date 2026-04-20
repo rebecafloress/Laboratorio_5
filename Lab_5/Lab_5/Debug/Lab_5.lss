@@ -1,0 +1,657 @@
+
+Lab_5.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000039e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000032a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800100  00800100  0000039e  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000039e  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003d0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000e0  00000000  00000000  00000410  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000d3f  00000000  00000000  000004f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000097b  00000000  00000000  0000122f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000074e  00000000  00000000  00001baa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000164  00000000  00000000  000022f8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000004fd  00000000  00000000  0000245c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000002b3  00000000  00000000  00002959  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000a0  00000000  00000000  00002c0c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_16>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a2 30       	cpi	r26, 0x02	; 2
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 13 01 	call	0x226	; 0x226 <main>
+  88:	0c 94 93 01 	jmp	0x326	; 0x326 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <__vector_16>:
+ *
+ * Caso especial duty = 0:   el pin nunca sube ? LED completamente apagado.
+ * Caso especial duty = 100: el pin nunca baja ? LED completamente encendido.
+ */
+ISR(TIMER0_OVF_vect)
+{
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	8f 93       	push	r24
+  9c:	9f 93       	push	r25
+    /* Avanzar el contador cíclico */
+    if (pwm_counter >= PWM_LED_PERIOD)
+  9e:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <pwm_counter>
+  a2:	84 36       	cpi	r24, 0x64	; 100
+  a4:	10 f0       	brcs	.+4      	; 0xaa <__vector_16+0x1a>
+    {
+        pwm_counter = 0;
+  a6:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <pwm_counter>
+    }
+
+    /* ?? Lógica PWM ?? */
+    if (pwm_duty == 0)
+  aa:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  ae:	81 11       	cpse	r24, r1
+  b0:	04 c0       	rjmp	.+8      	; 0xba <__vector_16+0x2a>
+    {
+        /* Duty 0% ? LED siempre apagado */
+        PORTD &= ~(1 << PD6);
+  b2:	8b b1       	in	r24, 0x0b	; 11
+  b4:	8f 7b       	andi	r24, 0xBF	; 191
+  b6:	8b b9       	out	0x0b, r24	; 11
+  b8:	19 c0       	rjmp	.+50     	; 0xec <__vector_16+0x5c>
+    }
+    else if (pwm_duty >= PWM_LED_PERIOD)
+  ba:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  be:	84 36       	cpi	r24, 0x64	; 100
+  c0:	20 f0       	brcs	.+8      	; 0xca <__vector_16+0x3a>
+    {
+        /* Duty 100% ? LED siempre encendido */
+        PORTD |= (1 << PD6);
+  c2:	8b b1       	in	r24, 0x0b	; 11
+  c4:	80 64       	ori	r24, 0x40	; 64
+  c6:	8b b9       	out	0x0b, r24	; 11
+  c8:	11 c0       	rjmp	.+34     	; 0xec <__vector_16+0x5c>
+    }
+    else
+    {
+        if (pwm_counter == 0)
+  ca:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <pwm_counter>
+  ce:	81 11       	cpse	r24, r1
+  d0:	04 c0       	rjmp	.+8      	; 0xda <__vector_16+0x4a>
+        {
+            /* Inicio del periodo ? pin en ALTO */
+            PORTD |= (1 << PD6);
+  d2:	8b b1       	in	r24, 0x0b	; 11
+  d4:	80 64       	ori	r24, 0x40	; 64
+  d6:	8b b9       	out	0x0b, r24	; 11
+  d8:	09 c0       	rjmp	.+18     	; 0xec <__vector_16+0x5c>
+        }
+        else if (pwm_counter == pwm_duty)
+  da:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <pwm_counter>
+  de:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  e2:	98 13       	cpse	r25, r24
+  e4:	03 c0       	rjmp	.+6      	; 0xec <__vector_16+0x5c>
+        {
+            /* Se alcanzó el duty ? pin en BAJO */
+            PORTD &= ~(1 << PD6);
+  e6:	8b b1       	in	r24, 0x0b	; 11
+  e8:	8f 7b       	andi	r24, 0xBF	; 191
+  ea:	8b b9       	out	0x0b, r24	; 11
+        }
+        /* En cualquier otro tick el pin mantiene su estado */
+    }
+
+    pwm_counter++;
+  ec:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <pwm_counter>
+  f0:	8f 5f       	subi	r24, 0xFF	; 255
+  f2:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <pwm_counter>
+}
+  f6:	9f 91       	pop	r25
+  f8:	8f 91       	pop	r24
+  fa:	0f 90       	pop	r0
+  fc:	0f be       	out	0x3f, r0	; 63
+  fe:	0f 90       	pop	r0
+ 100:	1f 90       	pop	r1
+ 102:	18 95       	reti
+
+00000104 <PWM_LED_Init>:
+{
+    /*
+     * 1. Configurar PD6 (Arduino D6) como salida
+     *    PD6 = bit 6 del puerto D
+     */
+    DDRD |= (1 << PD6);
+ 104:	8a b1       	in	r24, 0x0a	; 10
+ 106:	80 64       	ori	r24, 0x40	; 64
+ 108:	8a b9       	out	0x0a, r24	; 10
+
+    /* Asegurar que el pin inicia en LOW */
+    PORTD &= ~(1 << PD6);
+ 10a:	8b b1       	in	r24, 0x0b	; 11
+ 10c:	8f 7b       	andi	r24, 0xBF	; 191
+ 10e:	8b b9       	out	0x0b, r24	; 11
+    /*
+     * 2. Configurar Timer0 en modo Normal
+     *    WGM01:WGM00 = 0:0 ? modo Normal (contador libre hasta 255, luego desborda)
+     *    No se conecta ninguna salida OC0A/OC0B ? COM bits = 0
+     */
+    TCCR0A = 0x00;    /* Modo Normal, sin salida OC */
+ 110:	14 bc       	out	0x24, r1	; 36
+    /*
+     * 3. Configurar prescaler en TCCR0B
+     *    CS02=0 CS01=1 CS00=1 ? Prescaler = 64
+     *    f_overflow = 16MHz / 64 / 256 = 976.5 Hz
+     */
+    TCCR0B = (0 << CS02) |
+ 112:	82 e0       	ldi	r24, 0x02	; 2
+ 114:	85 bd       	out	0x25, r24	; 37
+
+    /*
+     * 4. Habilitar interrupción de desbordamiento de Timer0
+     *    TOIE0 = Timer Overflow Interrupt Enable 0
+     */
+    TIMSK0 |= (1 << TOIE0);
+ 116:	ee e6       	ldi	r30, 0x6E	; 110
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	80 81       	ld	r24, Z
+ 11c:	81 60       	ori	r24, 0x01	; 1
+ 11e:	80 83       	st	Z, r24
+
+    /* 5. Duty inicial: 0% (LED apagado) */
+    pwm_duty    = 0;
+ 120:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+    pwm_counter = 0;
+ 124:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <pwm_counter>
+ 128:	08 95       	ret
+
+0000012a <PWM_LED_SetDuty>:
+/* --------------------------------------------------------------------------- */
+
+void PWM_LED_SetDuty(uint8_t duty)
+{
+    /* Saturar al rango [0, PWM_LED_MAX] */
+    if (duty > PWM_LED_MAX)
+ 12a:	85 36       	cpi	r24, 0x65	; 101
+ 12c:	08 f0       	brcs	.+2      	; 0x130 <PWM_LED_SetDuty+0x6>
+    {
+        duty = PWM_LED_MAX;
+ 12e:	84 e6       	ldi	r24, 0x64	; 100
+     * Escritura atómica:
+     * pwm_duty es leída por la ISR. En el ATmega328P, una escritura
+     * a uint8_t es atómica (una sola instrucción ST), por lo que no
+     * es necesario deshabilitar interrupciones para esta asignación.
+     */
+    pwm_duty = duty;
+ 130:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 134:	08 95       	ret
+
+00000136 <PWM_LED_ADCToDuty>:
+    /*
+     * Mapeo lineal: [0, 1023] ? [0, 100]
+     * duty = (adc_val * 100) / 1023
+     * Se usa uint32_t para evitar desbordamiento: 1023 * 100 = 102300 > 65535
+     */
+    return (uint8_t)(((uint32_t)adc_val * PWM_LED_MAX) / 1023U);
+ 136:	9c 01       	movw	r18, r24
+ 138:	a4 e6       	ldi	r26, 0x64	; 100
+ 13a:	b0 e0       	ldi	r27, 0x00	; 0
+ 13c:	0e 94 84 01 	call	0x308	; 0x308 <__umulhisi3>
+ 140:	2f ef       	ldi	r18, 0xFF	; 255
+ 142:	33 e0       	ldi	r19, 0x03	; 3
+ 144:	40 e0       	ldi	r20, 0x00	; 0
+ 146:	50 e0       	ldi	r21, 0x00	; 0
+ 148:	0e 94 62 01 	call	0x2c4	; 0x2c4 <__udivmodsi4>
+ 14c:	82 2f       	mov	r24, r18
+}
+ 14e:	08 95       	ret
+
+00000150 <PWM_SetAngle>:
+
+void PWM_SetAngle(uint8_t grados)
+{
+	uint16_t ticks;
+
+	if (grados > SERVO_MAX_DEG)
+ 150:	85 3b       	cpi	r24, 0xB5	; 181
+ 152:	08 f0       	brcs	.+2      	; 0x156 <PWM_SetAngle+0x6>
+	{
+		grados = SERVO_MAX_DEG;
+ 154:	84 eb       	ldi	r24, 0xB4	; 180
+	}
+
+	ticks = (uint16_t)(PWM_MIN_TICKS +
+	((uint32_t)grados * PWM_RANGE_TICKS) / SERVO_MAX_DEG);
+ 156:	28 2f       	mov	r18, r24
+ 158:	30 e0       	ldi	r19, 0x00	; 0
+ 15a:	a0 ea       	ldi	r26, 0xA0	; 160
+ 15c:	bf e0       	ldi	r27, 0x0F	; 15
+ 15e:	0e 94 84 01 	call	0x308	; 0x308 <__umulhisi3>
+ 162:	24 eb       	ldi	r18, 0xB4	; 180
+ 164:	30 e0       	ldi	r19, 0x00	; 0
+ 166:	40 e0       	ldi	r20, 0x00	; 0
+ 168:	50 e0       	ldi	r21, 0x00	; 0
+ 16a:	0e 94 62 01 	call	0x2c4	; 0x2c4 <__udivmodsi4>
+	if (grados > SERVO_MAX_DEG)
+	{
+		grados = SERVO_MAX_DEG;
+	}
+
+	ticks = (uint16_t)(PWM_MIN_TICKS +
+ 16e:	28 51       	subi	r18, 0x18	; 24
+ 170:	3c 4f       	sbci	r19, 0xFC	; 252
+	((uint32_t)grados * PWM_RANGE_TICKS) / SERVO_MAX_DEG);
+	
+	OCR1A = ticks;
+ 172:	30 93 89 00 	sts	0x0089, r19	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 176:	20 93 88 00 	sts	0x0088, r18	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+ 17a:	08 95       	ret
+
+0000017c <PWM_Init>:
+
+
+void PWM_Init(void)
+{
+
+	DDRB |= (1 << PB1);
+ 17c:	84 b1       	in	r24, 0x04	; 4
+ 17e:	82 60       	ori	r24, 0x02	; 2
+ 180:	84 b9       	out	0x04, r24	; 4
+	
+	TCCR1A = (1 << COM1A1) |
+ 182:	82 e8       	ldi	r24, 0x82	; 130
+ 184:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+	(0 << COM1A0) |
+	(1 << WGM11)  |
+	(0 << WGM10);
+	TCCR1B = (1 << WGM13)  |
+ 188:	8a e1       	ldi	r24, 0x1A	; 26
+ 18a:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+	(1 << WGM12)  |
+	(0 << CS12)   |
+	(1 << CS11)   |
+	(0 << CS10);
+	
+	ICR1 = PWM_TOP;
+ 18e:	80 e4       	ldi	r24, 0x40	; 64
+ 190:	9c e9       	ldi	r25, 0x9C	; 156
+ 192:	90 93 87 00 	sts	0x0087, r25	; 0x800087 <__TEXT_REGION_LENGTH__+0x7f8087>
+ 196:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <__TEXT_REGION_LENGTH__+0x7f8086>
+
+	PWM_SetAngle(90U);
+ 19a:	8a e5       	ldi	r24, 0x5A	; 90
+ 19c:	0e 94 a8 00 	call	0x150	; 0x150 <PWM_SetAngle>
+ 1a0:	08 95       	ret
+
+000001a2 <Map_ADC_To_Angle>:
+    return ADC;
+}
+
+static uint8_t Map_ADC_To_Angle(uint16_t adc_val)
+{
+    return (uint8_t)(((uint32_t)adc_val * SERVO_MAX_DEG) / ADC_MAX);
+ 1a2:	9c 01       	movw	r18, r24
+ 1a4:	a4 eb       	ldi	r26, 0xB4	; 180
+ 1a6:	b0 e0       	ldi	r27, 0x00	; 0
+ 1a8:	0e 94 84 01 	call	0x308	; 0x308 <__umulhisi3>
+ 1ac:	2f ef       	ldi	r18, 0xFF	; 255
+ 1ae:	33 e0       	ldi	r19, 0x03	; 3
+ 1b0:	40 e0       	ldi	r20, 0x00	; 0
+ 1b2:	50 e0       	ldi	r21, 0x00	; 0
+ 1b4:	0e 94 62 01 	call	0x2c4	; 0x2c4 <__udivmodsi4>
+ 1b8:	82 2f       	mov	r24, r18
+}
+ 1ba:	08 95       	ret
+
+000001bc <ADC_Init>:
+
+/* ??????????????????????????????????????????????????????????????????????????? */
+
+static void ADC_Init(void)
+{
+    ADMUX  = (0 << REFS1) |
+ 1bc:	ac e7       	ldi	r26, 0x7C	; 124
+ 1be:	b0 e0       	ldi	r27, 0x00	; 0
+ 1c0:	80 e4       	ldi	r24, 0x40	; 64
+ 1c2:	8c 93       	st	X, r24
+             (1 << REFS0) |
+             (0 << ADLAR);
+
+    ADCSRA = (1 << ADEN)  |
+ 1c4:	ea e7       	ldi	r30, 0x7A	; 122
+ 1c6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c8:	87 e8       	ldi	r24, 0x87	; 135
+ 1ca:	80 83       	st	Z, r24
+             (1 << ADPS2) |
+             (1 << ADPS1) |
+             (1 << ADPS0);
+
+    /* Conversión de descarte */
+    ADMUX = (ADMUX & 0xF0) | (ADC_CH_SERVO1 & 0x07);
+ 1cc:	8c 91       	ld	r24, X
+ 1ce:	80 7f       	andi	r24, 0xF0	; 240
+ 1d0:	86 60       	ori	r24, 0x06	; 6
+ 1d2:	8c 93       	st	X, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1d4:	85 e3       	ldi	r24, 0x35	; 53
+ 1d6:	8a 95       	dec	r24
+ 1d8:	f1 f7       	brne	.-4      	; 0x1d6 <ADC_Init+0x1a>
+ 1da:	00 00       	nop
+    _delay_us(10);
+    ADCSRA |= (1 << ADSC);
+ 1dc:	80 81       	ld	r24, Z
+ 1de:	80 64       	ori	r24, 0x40	; 64
+ 1e0:	80 83       	st	Z, r24
+    while (ADCSRA & (1 << ADSC));
+ 1e2:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+ 1e6:	86 fd       	sbrc	r24, 6
+ 1e8:	fc cf       	rjmp	.-8      	; 0x1e2 <ADC_Init+0x26>
+    (void)ADC;
+ 1ea:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+ 1ee:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+ 1f2:	08 95       	ret
+
+000001f4 <ADC_Read>:
+}
+
+static uint16_t ADC_Read(uint8_t channel)
+{
+    ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
+ 1f4:	ec e7       	ldi	r30, 0x7C	; 124
+ 1f6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1f8:	90 81       	ld	r25, Z
+ 1fa:	90 7f       	andi	r25, 0xF0	; 240
+ 1fc:	8f 70       	andi	r24, 0x0F	; 15
+ 1fe:	89 2b       	or	r24, r25
+ 200:	80 83       	st	Z, r24
+ 202:	85 e3       	ldi	r24, 0x35	; 53
+ 204:	8a 95       	dec	r24
+ 206:	f1 f7       	brne	.-4      	; 0x204 <ADC_Read+0x10>
+ 208:	00 00       	nop
+    _delay_us(10);
+    ADCSRA |= (1 << ADSC);
+ 20a:	ea e7       	ldi	r30, 0x7A	; 122
+ 20c:	f0 e0       	ldi	r31, 0x00	; 0
+ 20e:	80 81       	ld	r24, Z
+ 210:	80 64       	ori	r24, 0x40	; 64
+ 212:	80 83       	st	Z, r24
+    while (ADCSRA & (1 << ADSC));
+ 214:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+ 218:	86 fd       	sbrc	r24, 6
+ 21a:	fc cf       	rjmp	.-8      	; 0x214 <ADC_Read+0x20>
+    return ADC;
+ 21c:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+ 220:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+}
+ 224:	08 95       	ret
+
+00000226 <main>:
+{
+    uint16_t adc1, adc2, adc3;
+    uint8_t  angulo1, angulo2, duty;
+
+    /* ?? Inicializaciones ?? */
+    ADC_Init();
+ 226:	0e 94 de 00 	call	0x1bc	; 0x1bc <ADC_Init>
+    PWM_Init();       /* Servo 1 — Timer1 — D9  */
+ 22a:	0e 94 be 00 	call	0x17c	; 0x17c <PWM_Init>
+    PWM2_Init();      /* Servo 2 — Timer2 — D3  */
+ 22e:	0e 94 52 01 	call	0x2a4	; 0x2a4 <PWM2_Init>
+    PWM_LED_Init();   /* LED PWM — Timer0 — D6  */
+ 232:	0e 94 82 00 	call	0x104	; 0x104 <PWM_LED_Init>
+
+    sei();            /* Habilitar interrupciones globales (necesario para LED) */
+ 236:	78 94       	sei
+
+    while (1)
+    {
+        /* ?? Servo 1: A6 ? D9 ?? */
+        adc1    = ADC_Read(ADC_CH_SERVO1);
+ 238:	86 e0       	ldi	r24, 0x06	; 6
+ 23a:	0e 94 fa 00 	call	0x1f4	; 0x1f4 <ADC_Read>
+        angulo1 = Map_ADC_To_Angle(adc1);
+ 23e:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <Map_ADC_To_Angle>
+        PWM_SetAngle(angulo1);
+ 242:	0e 94 a8 00 	call	0x150	; 0x150 <PWM_SetAngle>
+
+        /* ?? Servo 2: A7 ? D3 ?? */
+        adc2    = ADC_Read(ADC_CH_SERVO2);
+ 246:	87 e0       	ldi	r24, 0x07	; 7
+ 248:	0e 94 fa 00 	call	0x1f4	; 0x1f4 <ADC_Read>
+        angulo2 = Map_ADC_To_Angle(adc2);
+ 24c:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <Map_ADC_To_Angle>
+        PWM2_SetAngle(angulo2);
+ 250:	0e 94 3b 01 	call	0x276	; 0x276 <PWM2_SetAngle>
+
+        /* ?? LED PWM: A5 ? D6 ?? */
+        adc3 = ADC_Read(ADC_CH_LED);
+ 254:	85 e0       	ldi	r24, 0x05	; 5
+ 256:	0e 94 fa 00 	call	0x1f4	; 0x1f4 <ADC_Read>
+        duty = PWM_LED_ADCToDuty(adc3);
+ 25a:	0e 94 9b 00 	call	0x136	; 0x136 <PWM_LED_ADCToDuty>
+        PWM_LED_SetDuty(duty);
+ 25e:	0e 94 95 00 	call	0x12a	; 0x12a <PWM_LED_SetDuty>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 262:	2f ef       	ldi	r18, 0xFF	; 255
+ 264:	89 ef       	ldi	r24, 0xF9	; 249
+ 266:	90 e0       	ldi	r25, 0x00	; 0
+ 268:	21 50       	subi	r18, 0x01	; 1
+ 26a:	80 40       	sbci	r24, 0x00	; 0
+ 26c:	90 40       	sbci	r25, 0x00	; 0
+ 26e:	e1 f7       	brne	.-8      	; 0x268 <main+0x42>
+ 270:	00 c0       	rjmp	.+0      	; 0x272 <main+0x4c>
+ 272:	00 00       	nop
+ 274:	e1 cf       	rjmp	.-62     	; 0x238 <main+0x12>
+
+00000276 <PWM2_SetAngle>:
+
+void PWM2_SetAngle(uint8_t grados)
+{
+    uint8_t ticks;
+
+    if (grados > SERVO2_MAX_DEG)
+ 276:	85 3b       	cpi	r24, 0xB5	; 181
+ 278:	08 f0       	brcs	.+2      	; 0x27c <PWM2_SetAngle+0x6>
+    {
+        grados = SERVO2_MAX_DEG;
+ 27a:	84 eb       	ldi	r24, 0xB4	; 180
+    }
+
+    ticks = (uint8_t)(PWM2_MIN_TICKS +
+                      ((uint16_t)grados * PWM2_RANGE_TICKS) / SERVO2_MAX_DEG);
+ 27c:	9d e1       	ldi	r25, 0x1D	; 29
+ 27e:	89 9f       	mul	r24, r25
+ 280:	90 01       	movw	r18, r0
+ 282:	11 24       	eor	r1, r1
+ 284:	a3 e8       	ldi	r26, 0x83	; 131
+ 286:	bd e2       	ldi	r27, 0x2D	; 45
+ 288:	0e 94 84 01 	call	0x308	; 0x308 <__umulhisi3>
+ 28c:	96 95       	lsr	r25
+ 28e:	87 95       	ror	r24
+ 290:	92 95       	swap	r25
+ 292:	82 95       	swap	r24
+ 294:	8f 70       	andi	r24, 0x0F	; 15
+ 296:	89 27       	eor	r24, r25
+ 298:	9f 70       	andi	r25, 0x0F	; 15
+ 29a:	89 27       	eor	r24, r25
+    if (grados > SERVO2_MAX_DEG)
+    {
+        grados = SERVO2_MAX_DEG;
+    }
+
+    ticks = (uint8_t)(PWM2_MIN_TICKS +
+ 29c:	89 5f       	subi	r24, 0xF9	; 249
+                      ((uint16_t)grados * PWM2_RANGE_TICKS) / SERVO2_MAX_DEG);
+
+    OCR2B = ticks;
+ 29e:	80 93 b4 00 	sts	0x00B4, r24	; 0x8000b4 <__TEXT_REGION_LENGTH__+0x7f80b4>
+ 2a2:	08 95       	ret
+
+000002a4 <PWM2_Init>:
+#include "pwm_servo2.h"
+
+void PWM2_Init(void)
+{
+    DDRD |= (1 << PD3);
+ 2a4:	8a b1       	in	r24, 0x0a	; 10
+ 2a6:	88 60       	ori	r24, 0x08	; 8
+ 2a8:	8a b9       	out	0x0a, r24	; 10
+
+    TCCR2A = (1 << COM2B1) |    
+ 2aa:	83 e2       	ldi	r24, 0x23	; 35
+ 2ac:	80 93 b0 00 	sts	0x00B0, r24	; 0x8000b0 <__TEXT_REGION_LENGTH__+0x7f80b0>
+             (0 << COM2B0) |    
+             (1 << WGM21)  |   
+             (1 << WGM20);      
+ 
+    TCCR2B = (1 << WGM22)  |   
+ 2b0:	8f e0       	ldi	r24, 0x0F	; 15
+ 2b2:	80 93 b1 00 	sts	0x00B1, r24	; 0x8000b1 <__TEXT_REGION_LENGTH__+0x7f80b1>
+             (1 << CS22)   |    
+             (1 << CS21)   |    
+             (1 << CS20);       
+
+    OCR2A = PWM2_TOP;
+ 2b6:	8f ef       	ldi	r24, 0xFF	; 255
+ 2b8:	80 93 b3 00 	sts	0x00B3, r24	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+
+    PWM2_SetAngle(90U);
+ 2bc:	8a e5       	ldi	r24, 0x5A	; 90
+ 2be:	0e 94 3b 01 	call	0x276	; 0x276 <PWM2_SetAngle>
+ 2c2:	08 95       	ret
+
+000002c4 <__udivmodsi4>:
+ 2c4:	a1 e2       	ldi	r26, 0x21	; 33
+ 2c6:	1a 2e       	mov	r1, r26
+ 2c8:	aa 1b       	sub	r26, r26
+ 2ca:	bb 1b       	sub	r27, r27
+ 2cc:	fd 01       	movw	r30, r26
+ 2ce:	0d c0       	rjmp	.+26     	; 0x2ea <__udivmodsi4_ep>
+
+000002d0 <__udivmodsi4_loop>:
+ 2d0:	aa 1f       	adc	r26, r26
+ 2d2:	bb 1f       	adc	r27, r27
+ 2d4:	ee 1f       	adc	r30, r30
+ 2d6:	ff 1f       	adc	r31, r31
+ 2d8:	a2 17       	cp	r26, r18
+ 2da:	b3 07       	cpc	r27, r19
+ 2dc:	e4 07       	cpc	r30, r20
+ 2de:	f5 07       	cpc	r31, r21
+ 2e0:	20 f0       	brcs	.+8      	; 0x2ea <__udivmodsi4_ep>
+ 2e2:	a2 1b       	sub	r26, r18
+ 2e4:	b3 0b       	sbc	r27, r19
+ 2e6:	e4 0b       	sbc	r30, r20
+ 2e8:	f5 0b       	sbc	r31, r21
+
+000002ea <__udivmodsi4_ep>:
+ 2ea:	66 1f       	adc	r22, r22
+ 2ec:	77 1f       	adc	r23, r23
+ 2ee:	88 1f       	adc	r24, r24
+ 2f0:	99 1f       	adc	r25, r25
+ 2f2:	1a 94       	dec	r1
+ 2f4:	69 f7       	brne	.-38     	; 0x2d0 <__udivmodsi4_loop>
+ 2f6:	60 95       	com	r22
+ 2f8:	70 95       	com	r23
+ 2fa:	80 95       	com	r24
+ 2fc:	90 95       	com	r25
+ 2fe:	9b 01       	movw	r18, r22
+ 300:	ac 01       	movw	r20, r24
+ 302:	bd 01       	movw	r22, r26
+ 304:	cf 01       	movw	r24, r30
+ 306:	08 95       	ret
+
+00000308 <__umulhisi3>:
+ 308:	a2 9f       	mul	r26, r18
+ 30a:	b0 01       	movw	r22, r0
+ 30c:	b3 9f       	mul	r27, r19
+ 30e:	c0 01       	movw	r24, r0
+ 310:	a3 9f       	mul	r26, r19
+ 312:	70 0d       	add	r23, r0
+ 314:	81 1d       	adc	r24, r1
+ 316:	11 24       	eor	r1, r1
+ 318:	91 1d       	adc	r25, r1
+ 31a:	b2 9f       	mul	r27, r18
+ 31c:	70 0d       	add	r23, r0
+ 31e:	81 1d       	adc	r24, r1
+ 320:	11 24       	eor	r1, r1
+ 322:	91 1d       	adc	r25, r1
+ 324:	08 95       	ret
+
+00000326 <_exit>:
+ 326:	f8 94       	cli
+
+00000328 <__stop_program>:
+ 328:	ff cf       	rjmp	.-2      	; 0x328 <__stop_program>
